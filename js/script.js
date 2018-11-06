@@ -1,12 +1,5 @@
 $(document).ready(function() {
 
-	if(location.hash != '') {
-		$('html, body').animate({scrollTop: $(location.hash).offset().top}, 1000);
-		location.hash = '';
-	}
-
-	new WOW().init();
-
 	$(window).scroll(function(e){
 		parallax();
 	});
@@ -21,22 +14,16 @@ $(document).ready(function() {
 		}
 	}
 
-	$(document).bind( 'mousewheel', function (e) {
-    var nt = $(document.body).scrollTop()-(e.deltaY*e.deltaFactor*100);
-
-    $(document.body).stop().animate( {
-         scrollTop : nt
-     } , 1000 );
-} )
-
-	var mobBurg = $('.burger');
+	var mobBurg = $('.header .burger');
 	var fixedMenu = $('.mob-f');
 	mobBurg.on('click', function() {
+		$(this).toggleClass('active');
 		$('.mob-f').toggleClass('active');
 		$('body').toggleClass('active');
 	})
 	fixedMenu.on('click', function() {
 		$(this).toggleClass('active');
+		mobBurg.toggleClass('active');
 		$('body').toggleClass('active');
 	})
 
@@ -71,21 +58,24 @@ $(document).ready(function() {
 	});
 
 	$('.programs-slider').owlCarousel({
-		loop:false,
-		margin:30,
-		nav:false,
+		loop: false,
+		margin: 30,
+		center: false,
+		nav: false,
 		navText: [`<img src=${vars.base_url + "/assets/img/arrow.png"} alt="arrow">`, `<img src=${vars.base_url + "/assets/img/arrow.png"} alt="arrow">`],
-		responsiveClass:true,
-		responsive:{
+		responsiveClass: true,
+		responsive: {
 			0:{
 				items:1,
 				margin: 0,
 				nav: true,
 				dots: true,
+				center: false,
 			},
-			501: {
+			650: {
 				items: 2,
-				nav:false
+				nav:false,
+				margin: 0
 			},
 			850: {
 				items: 3,
@@ -117,9 +107,9 @@ $(document).ready(function() {
 	})
 
 	$(window).load(function() {
-   $('.preloader').removeClass('active');
-	 $('body').removeClass('active');
-});
+  	$('.preloader').removeClass('active');
+		$('body').removeClass('active');
+	});
 
 });
 
